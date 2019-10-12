@@ -8,7 +8,9 @@ void throwInMain(void) {
 namespace {
     void throwInLocal(void) {
         printStackAddress(__PRETTY_FUNCTION__);
+#ifndef FUNCOBJ_NO_THROW
         throw std::runtime_error("Error");
+#endif
     }
 }
 

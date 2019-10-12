@@ -2,13 +2,13 @@
 
 ## Summary
 
-Throwing C++ exceptions crash in code which is compiled with clang++ 8 and running on Cygwin64.
+Throwing C++ exceptions crashes in code which is compiled with clang++ 8 and running on Cygwin64.
 
 ## Preconditions
 
 These software packages are required to reproduce the issue.
 
-+ Windows 10 64-bit (Version 1903, OS build 18362.418)
++ Windows 10 64-bit (version 1903, OS build 18362.418)
 + Cygwin 64-bit installation 3.0.7
 + clang++ (version 8.0.1, Target: x86_64-unknown-windows-cygnus)
 + g++ 7.4.0 for Cygwin
