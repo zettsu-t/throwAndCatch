@@ -17,7 +17,7 @@ These software packages are required to reproduce the issue.
 
 ## Steps to Reproduce
 
-Check out this repository and build with GNU make.
+Check out this repository and build with GNU make. Make sure you compile all .cpp files with -O0 option.
 
 ```bash
 ## Execute on a Cygwin64 terminal
@@ -55,15 +55,17 @@ invokeFunc(funcObj);
 This is a backtrace on gdb.
 
 ```text
+gdb: unknown target exception 0x20474343 at 0x7fface6ea839
+
 Thread 1 "throw_catch_clang" received signal ?, Unknown signal.
 0x00007fface6ea839 in RaiseException () from /cygdrive/c/WINDOWS/System32/KERNELBASE.dll
 (gdb) bt
 #0  0x00007fface6ea839 in RaiseException () from /cygdrive/c/WINDOWS/System32/KERNELBASE.dll
 #1  0x00000003de6bcbf1 in cyggcc_s-seh-1!_Unwind_RaiseException () from /usr/bin/cyggcc_s-seh-1.dll
 #2  0x00000003c3599148 in cygstdc++-6!.cxa_throw () from /usr/bin/cygstdc++-6.dll
-#3  0x0000000100401948 in (anonymous namespace)::throwInLocal () at throw_catch_main.cpp:11
-#4  0x0000000100402c65 in std::_Function_handler<void (), void (*)()>::_M_invoke(std::_Any_data const&) (
-    __functor=...) at /usr/lib/gcc/x86_64-pc-cygwin/7.4.0/include/c++/bits/std_function.h:316
+#3  0x0000000100401948 in (anonymous namespace)::throwInLocal () at throw_catch_main.cpp:12
+#4  0x0000000100402c65 in std::_Function_handler<void (), void (*)()>::_M_invoke(std::_Any_data const&)
+    (__functor=...) at /usr/lib/gcc/x86_64-pc-cygwin/7.4.0/include/c++/bits/std_function.h:316
 #5  0x00000001004032aa in std::function<void ()>::operator()() const (this=0xffffcb58)
     at /usr/lib/gcc/x86_64-pc-cygwin/7.4.0/include/c++/bits/std_function.h:706
 #6  0x00000000ffffc8a8 in ?? ()
@@ -74,4 +76,4 @@ Invoking the std::function instance **after** the invocation prevents the crash.
 
 ## Additional information
 
-Cygwin g++, MinGW g++ 8.2.0 and Windows native clang++ 8.0.1 (Target: x86_64-pc-windows-msvc) do not cause this issue.
+Cygwin g++, MinGW g++ 8.2.0 and Windows native clang++ 8.0.1 (Target: x86_64-pc-windows-msvc) do not cause this issue. Using Cygwin clang++ 8.0.1 with -O2 option also does not crash.
